@@ -7,7 +7,7 @@ android {
     compileSdk 30
 
     defaultConfig {
-        applicationId "de.niew.myapplication"
+        applicationId "de.niew.reactivexmvi"
         minSdk 21
         targetSdk 30
         versionCode 1
