@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
 }
 
+group='de.niew.reactivexmvi'
+
 android {
     compileSdk 30
 
@@ -51,4 +53,26 @@ dependencies {
     //reactive and mvi Pattern
     implementation "io.reactivex.rxjava3:rxandroid:$versions.rx_android_version"
     implementation("io.reactivex.rxjava3:rxkotlin:$versions.rx_version")
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    options.charSet = 'UTF-8'
+    failOnError  false
+    source = android.sourceSets.main.java.sourceFiles
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
 }
